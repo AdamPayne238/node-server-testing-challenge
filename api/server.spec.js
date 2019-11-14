@@ -1,10 +1,12 @@
 const request = require('supertest');
 const server = require('./server');
 
+// ENV TEST
 it('should set dv environment to tsting', function(){
     expect(process.env.DB_ENV).toBe("testing")
 })
 
+// GET / TESTS
 describe('server', function(){
     describe('GET /', function(){
         it('should return 200 OK', function(){
