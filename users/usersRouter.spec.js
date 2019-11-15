@@ -7,7 +7,7 @@ const server = require('../api/server');
 describe('usersRouter', function(){
     describe('GET /users', function(){
         it('should return 200 OK', function(){
-            return request(server).get('/').then(res => {
+            return request(server).get('/users').then(res => {
                 expect(res.status).toBe(200);
             })
         })
@@ -26,18 +26,22 @@ describe('usersRouter', () => {
     describe('POST /users', () => {
         it('should return 200 OK', () => {
             return request(server)
-            .post('/')
+            .post('/users')
             .send({
-                "username": "newusername",
-                "email": "newemail"
+                username: "newusername",
+                email: "newemail"
             })
             .then(res => {
                 // console.log(res)
                 expect(res.status).toBe(200);
             })
-            // .catch(err => {
-            //     expect(err.status).toBe(404);
-            // })
+        })
+        it('should return JSON response', function(){
+            return request(server)
+            .get('/')
+            .then(res => {
+                expect(res.type).toMatch(/json/i);
+            })
         })
     })
 })
@@ -58,5 +62,32 @@ describe('usersRouter', () => {
                 expect(err.status).toBe(404);
             })
         })
+        it('should return JSON response', function(){
+            return request(server)
+            .get('/')
+            .then(res => {
+                expect(res.type).toMatch(/json/i);
+            })
+        })
     })
 })
+
+///TRY
+// describe('usersRouter', () => {
+//     describe('POST /users', () => {
+//         it('should return 200 OK', async () => {
+//             let res = await request(server)
+//             .post('/users')
+//             .send({
+//                 username: "newusername",
+//                 email: "newemail"
+//             })
+//             .then(res => {
+//                 expect(res.status).toBe(200);
+//             })
+//             .catch(error => {
+//                 error.status(500).json(error)
+//             })
+//         })
+//     })
+// })
